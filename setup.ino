@@ -1,5 +1,5 @@
-//Credit: Arduino Example Code - AnalogInOutSerial
-//I highly refrenced the example code in order to build the code below. 
+//Credit: https://itp.nyu.edu/physcomp/labs/labs-serial-communication/lab-serial-input-to-the-p5-js-ide/
+//I highly refrenced the example code on this website in order to build the code below. 
 void setup() {
   Serial.begin(9600); 
   pinMode(A0,INPUT);

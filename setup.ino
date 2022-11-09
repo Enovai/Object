@@ -1,3 +1,5 @@
+//Credit: Arduino Example Code - AnalogInOutSerial
+//I highly refrenced the example code in order to build the code below. 
 void setup() {
   Serial.begin(9600); 
   pinMode(A0,INPUT);

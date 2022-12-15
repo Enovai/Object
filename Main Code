@@ -1,0 +1,121 @@
+/Credit: Most of this was made using the template given and p5.serialcontrol starter code
+//I also looked up a lot of references in the p5js references section.
+let serial;
+let latestData = "waiting for data";
+
+let button;
+let number;
+let prox;
+function setup() {
+  createCanvas(1700, 1000);
+
+  serial = new p5.SerialPort();
+
+  serial.list();
+  serial.open("/dev/tty.usbmodem141101");
+
+  serial.on("connected", serverConnected);
+
+  serial.on("list", gotList);
+
+  serial.on("data", gotData);
+
+  serial.on("error", gotError);
+
+  serial.on("open", gotOpen);
+
+  serial.on("close", gotClose);
+}
+
+function serverConnected() {
+  print("Connected to Server");
+}
+
+function gotList(thelist) {
+  print("List of Serial Ports:");
+
+  for (let i = 0; i < thelist.length; i++) {
+    print(i + " " + thelist[i]);
+  }
+}
+
+function gotOpen() {
+  print("Serial Port is Open");
+}
+
+function gotClose() {
+  print("Serial Port is Closed");
+  latestData = "Serial Port is Closed";
+}
+
+function gotError(theerror) {
+  print(theerror);
+}
+
+function gotData() {
+  let currentString = serial.readLine();
+  var Array = split(currentString, ",");
+  prox=Array[0];
+  button = Array[2];
+  number = Array[1];
+}
+function mousePressed() {
+  if (
+    mouseX > 0 &&
+    mouseX < windowWidth &&
+    mouseY > 0 &&
+    mouseY < windowHeight
+  ) {
+    let fs = fullscreen();
+    fullscreen(!fs);
+  }
+}
+function draw() {
+  clear();
+  fill(255, 255, 255);
+  background(0);
+  let ms = millis()
+  if (prox == 1) {
+    textSize(140);
+    text("Please press the button.", 200, 600);
+  }
+  if(ms>5000)
+  {
+    if (button == 1) {
+      if (number == 1) {
+        clear();
+        textSize(140);
+        text("Believe in yourself.", 200, 600);
+      }
+      if (number == 2) {
+        clear();
+        textSize(200);
+        text("You are you.", 400, 600);
+      }
+      if (number == 3) {
+        clear();
+        textSize(200);
+        text("You are worthy.", 200, 600);
+      }
+      if (number == 4) {
+        clear();
+        textSize(170);
+        text("Hard work pays off.", 200, 600);
+      }
+      if (number == 5) {
+        textSize(150);
+        text("Do not doubt yourself.", 150, 600);
+      }
+      if (number == 6) {
+        clear();
+        textSize(200);
+        text("Love yourself.", 275, 600);
+      }
+      if (number == 7) {
+        clear();
+        textSize(120);
+        text("The greatest love is self-love.", 100, 600);
+      }
+    }
+  }
+}
